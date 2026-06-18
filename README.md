@@ -1,16 +1,23 @@
 # UiLibrary
 
-Eine kleine, leichtgewichtige UI‑Library für Roblox‑Projekte.
+Eine kleine, leichtgewichtige UI‑Library für Roblox‑Projekte — übersichtlich, modular und per `loadstring` nutzbar.
 
-Hinweis: Der Repository‑Name enthält derzeit einen Tippfehler ("UiLibary"). Im README verwende ich die korrigierte Schreibweise "UiLibrary" — wenn du auch den Repository‑Namen ändern möchtest, sag Bescheid.
+Hinweis: Der Repository‑Name lautet aktuell `UiLibary` (Tippfehler). In dieser Dokumentation verwende ich die korrekte Schreibweise „UiLibrary“. Wenn du möchtest, kann ich den Repo‑Namen umbenennen — sag Bescheid.
 
-## Kurzbeschreibung
+## Übersicht
 
-Diese Bibliothek stellt wiederverwendbare GUI‑Komponenten für Roblox bereit (Fenster, Tabs, Sektionen, Buttons, Toggles, Slider, Dropdowns, Labels, Avatar‑Preview u.ä.). Die Library lässt sich per `loadstring` ins Spiel laden.
+Diese Bibliothek bietet wiederverwendbare GUI‑Komponenten für Roblox, z. B. Fenster, Tabs, Sektionen, Buttons, Toggles, Slider, Dropdowns und Labels. Ziel ist ein einfaches API‑Design zum schnellen Erstellen von Ingame‑UIs.
 
-## Schnellstart
+## Features
 
-1. Im Spiel verwenden (Beispiel):
+- Einfaches API‑Interface (CreateWindow, CreateTab, CreateSection, CreateButton, …)
+- Themes (z. B. Dark/Light)
+- Callbacks und Keybinds
+- Beispiele/Demos im Repository
+
+## Schnellstart (Roblox)
+
+1) Direkt ins Spiel laden (Beispiel):
 
 ```lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Relix78/UiLibary/main/loader"))()
@@ -20,38 +27,41 @@ local Window = Library:CreateWindow({
     Version = "1.0.0",
     Theme = "Dark",
 })
-```
 
-2. Komponenten erstellen (Beispiel):
-
-```lua
 local MainTab = Window:CreateTab({ Name = "Main" })
 local LeftSection = MainTab:CreateSection({ Title = "Buttons", Column = "Left" })
-LeftSection:CreateButton("Test Button", function() print("Button clicked") end)
+LeftSection:CreateButton("Test Button", function()
+    print("Button clicked")
+end)
 ```
 
-Hinweis: Die vollständige API und alle Optionen (Themes, Logos, Callbacks, Keybinds etc.) findest du in den Beispielen im Repo‑Code.
+Hinweis: Die URL verwendet aktuell den bestehenden Repo‑Namen `UiLibary`. Nach einer Umbenennung muss ggf. der Loader‑Link angepasst werden.
 
-## Beispiele
+## Entwicklung / Beispiele
 
-Im Repository gibt es Beispielskripte, die zeigen, wie Fenster, Tabs, Sektionen und die verschiedenen UI‑Elemente erstellt werden. Schau dir insbesondere die Dateien im Ordner `examples/` oder `demos/` an (falls vorhanden).
+- Sieh dir den Ordner `examples/` oder `demos/` im Repo an (falls vorhanden) für vollständige Nutzungsbeispiele.
+- Zum Entwickeln kannst du die Dateien lokal editieren und per `require`/`loadstring` testen.
 
-## Beitragende
+## API & Dokumentation
 
-Beiträge, Fehlerberichte und Feature‑Anfragen sind willkommen. Bitte:
+Diese README enthält nur eine Kurzübersicht. Ergänze die ausführliche API‑Dokumentation (Methoden, Parameter, Rückgaben) in einem eigenen Abschnitt oder als separate Datei `API.md`, sobald die endgültige API feststeht.
 
-- Öffne ein Issue für Bugs oder größere Änderungen.
-- Erstelle einen Pull Request mit einer klaren Beschreibung und Tests/Beispielen, wenn möglich.
-- Schreibe aussagekräftige Commit‑Nachrichten.
+## Beiträge
+
+Beiträge sind willkommen. So kannst du helfen:
+
+- Öffne ein Issue für Bugs oder Feature‑Wünsche.
+- Erstelle einen Pull Request mit klarer Beschreibung und (wenn möglich) Tests oder Beispielskripten.
+- Achte auf saubere Commit‑Nachrichten.
 
 ## Lizenz
 
-Trage hier die gewünschte Lizenz ein (z. B. MIT):
+Trage hier die gewünschte Lizenz ein (z. B. MIT). Beispiel:
 
 MIT © Relix78
 
 ## TODO
 
-- API‑Dokumentation ergänzen (Liste aller Komponenten und Optionen).
-- Falls noch nicht vorhanden: Beispiel‑Ordner / Storybook‑ähnliche Demos hinzufügen.
-- Optional: Repo‑Name korrigieren (UiLibary → UiLibrary) und ggf. Paketnamen/Importpfade anpassen.
+- Vollständige API‑Dokumentation ergänzen (`API.md`).
+- Beispiele/Beispielordner erweitern oder ein Storybook‑ähnliches Demo hinzufügen.
+- Optional: Repository umbenennen von `UiLibary` → `UiLibrary` und Loader‑URL anpassen.
