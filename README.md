@@ -1,67 +1,39 @@
 # UiLibrary
 
-Eine kleine, leichtgewichtige UI‑Library für Roblox‑Projekte — übersichtlich, modular und per `loadstring` nutzbar.
+Ein schlankes, modulares UI‑Toolkit für Roblox‑Projekte. (Repository‑Name: `UiLibary` — Tippfehler bleibt unverändert.)
 
-Hinweis: Der Repository‑Name lautet aktuell `UiLibary` (Tippfehler). In dieser Dokumentation verwende ich die korrekte Schreibweise „UiLibrary“. Wenn du möchtest, kann ich den Repo‑Namen umbenennen — sag Bescheid.
+Kurz und knapp: diese Library stellt grundlegende GUI‑Bausteine bereit und hat ein einfaches, konsistentes API‑Design.
 
-## Übersicht
+Kurzdokumentation / API
 
-Diese Bibliothek bietet wiederverwendbare GUI‑Komponenten für Roblox, z. B. Fenster, Tabs, Sektionen, Buttons, Toggles, Slider, Dropdowns und Labels. Ziel ist ein einfaches API‑Design zum schnellen Erstellen von Ingame‑UIs.
+- Loader
+  - Laden per loadstring: `local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Relix78/UiLibary/main/loader.lua?t=" .. os.time()))()`
 
-## Features
+- Library
+  - Library:CreateWindow(options) → Window
+    - options (Beispiele): Title, Version, Theme, Logo, SecondaryLogo, Themes (Tabelle), OnClose (funktion)
 
-- Einfaches API‑Interface (CreateWindow, CreateTab, CreateSection, CreateButton, …)
-- Themes (z. B. Dark/Light)
-- Callbacks und Keybinds
-- Beispiele/Demos im Repository
+- Window
+  - Window:CreateTab(opts) → Tab
+    - opts: Name, Icon, Columns (bool), Searchbar (bool), SecondaryTab (bool)
 
-## Schnellstart (Roblox)
+- Tab
+  - Tab:CreateSection(opts) → Section
+    - opts: Title (string) oder direkt CreateSection("Title"), Column = "Left"/"Right", Droppable (bool)
 
-1) Direkt ins Spiel laden (Beispiel):
+- Section
+  - Section:CreateButton(title, callback)
+  - Section:CreateToggle({Title, Default, Callback})
+  - Section:CreateSlider({Title, Min, Max, Default, Suffix, Callback})
+  - Section:CreateDropdown({Title, Options (array), Default, Searchbar, Callback})
+  - Section:CreateLabel({Title, Default})
+  - Section:CreateParagraph({Text})
+  - Section:CreateAvatar(name)
+  - Section:CreateKeybind({Title, Default (Enum.KeyCode), Callback})
 
-```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Relix78/UiLibary/main/loader"))()
+Hinweise
 
-local Window = Library:CreateWindow({
-    Title = "Mein UI",
-    Version = "1.0.0",
-    Theme = "Dark",
-})
+- Die README enthält nur eine kompakte API‑Referenz und kein Beispiel‑/Entwicklungs‑Material.
+- Die genaue Signatur einzelner Methoden (optionale Felder, Rückgabewerte) ist in der Quelldatei dokumentiert — bei Fragen nenne mir eine Methode, dann ergänze ich die Details.
 
-local MainTab = Window:CreateTab({ Name = "Main" })
-local LeftSection = MainTab:CreateSection({ Title = "Buttons", Column = "Left" })
-LeftSection:CreateButton("Test Button", function()
-    print("Button clicked")
-end)
-```
-
-Hinweis: Die URL verwendet aktuell den bestehenden Repo‑Namen `UiLibary`. Nach einer Umbenennung muss ggf. der Loader‑Link angepasst werden.
-
-## Entwicklung / Beispiele
-
-- Sieh dir den Ordner `examples/` oder `demos/` im Repo an (falls vorhanden) für vollständige Nutzungsbeispiele.
-- Zum Entwickeln kannst du die Dateien lokal editieren und per `require`/`loadstring` testen.
-
-## API & Dokumentation
-
-Diese README enthält nur eine Kurzübersicht. Ergänze die ausführliche API‑Dokumentation (Methoden, Parameter, Rückgaben) in einem eigenen Abschnitt oder als separate Datei `API.md`, sobald die endgültige API feststeht.
-
-## Beiträge
-
-Beiträge sind willkommen. So kannst du helfen:
-
-- Öffne ein Issue für Bugs oder Feature‑Wünsche.
-- Erstelle einen Pull Request mit klarer Beschreibung und (wenn möglich) Tests oder Beispielskripten.
-- Achte auf saubere Commit‑Nachrichten.
-
-## Lizenz
-
-Trage hier die gewünschte Lizenz ein (z. B. MIT). Beispiel:
-
-MIT © Relix78
-
-## TODO
-
-- Vollständige API‑Dokumentation ergänzen (`API.md`).
-- Beispiele/Beispielordner erweitern oder ein Storybook‑ähnliches Demo hinzufügen.
-- Optional: Repository umbenennen von `UiLibary` → `UiLibrary` und Loader‑URL anpassen.
+Das war's — sauber, kurz und fokussiert auf die API. Wenn du eine einzelne Methode ausführlicher dokumentiert haben möchtest, sag mir welche.
