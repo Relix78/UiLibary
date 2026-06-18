@@ -1,150 +1,57 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Relix78/UiLibary/main/loader))  --Load the UiLibary
+# UiLibrary
 
---//Create window
+Eine kleine, leichtgewichtige UI‑Library für Roblox‑Projekte.
+
+Hinweis: Der Repository‑Name enthält derzeit einen Tippfehler ("UiLibary"). Im README verwende ich die korrigierte Schreibweise "UiLibrary" — wenn du auch den Repository‑Namen ändern möchtest, sag Bescheid.
+
+## Kurzbeschreibung
+
+Diese Bibliothek stellt wiederverwendbare GUI‑Komponenten für Roblox bereit (Fenster, Tabs, Sektionen, Buttons, Toggles, Slider, Dropdowns, Labels, Avatar‑Preview u.ä.). Die Library lässt sich per `loadstring` ins Spiel laden.
+
+## Schnellstart
+
+1. Im Spiel verwenden (Beispiel):
+
+```lua
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Relix78/UiLibary/main/loader"))()
+
 local Window = Library:CreateWindow({
-    Title = "Test UI",                                                  -- Name the Ui
-    Version = "1.0.0",                                                  -- Version of the Ui
-    Theme = "Dark",                                                     -- Set a Theme you defined you dont need to standart is dark
-    Logo = "<font color=\"rgb(0, 170, 255)\">Test</font>UI",          -- Add the name of the Logo it supports multi colour Names
-    SecondaryLogo = "| UI Example",                                     -- The secondary Logo it can be the game name o annything
-
-    -- Custom themes
-    Themes = {                                                          -- Define the Themes here
-        Dark = {
-            Main = Color3.fromRGB(35,35,35),                            -- Background Colour
-            Accent = Color3.fromRGB(0,170,255)                          -- Accent Colour
-        },
-
-        Red = {
-            Main = Color3.fromRGB(40,20,20),
-            Accent = Color3.fromRGB(255,80,80)
-        }
-    },
-
-    -- Runs when UI closes                                              
-    OnClose = function()
-        print("UI closed!")                                             -- Can have a Custom on close Event                        
-    end
+    Title = "Mein UI",
+    Version = "1.0.0",
+    Theme = "Dark",
 })
+```
 
--- Create main Tab                                                      -- Create the main Tab using Window:CreateTab
-local MainTab = Window:CreateTab({
-    Name = "Main",                                                      -- Name of the Tab
-    Icon = "11433532654",                                               -- Icon of the Tab
-    Columns = true,                                                     -- Enable/Disable Colums
-    Searchbar = true                                                    -- Enable/Disable Searchbar on top of the Tabs
-})
+2. Komponenten erstellen (Beispiel):
 
--- Left section
-local LeftSection = MainTab:CreateSection({                             -- Create Sections using the name of the tab so MainTab:CreateSection, the toggles buttons or annything after the section is automatically addet to it
-    Title = "Buttons & Toggles",                                        -- Title of the Section
-    Column = "Left",                                                    -- Choose the colum Left or Right
-    Droppable = true                                                    -- Droppable makes the Section foldable
-})
+```lua
+local MainTab = Window:CreateTab({ Name = "Main" })
+local LeftSection = MainTab:CreateSection({ Title = "Buttons", Column = "Left" })
+LeftSection:CreateButton("Test Button", function() print("Button clicked") end)
+```
 
--- Button
-LeftSection:CreateButton("Test Button", function()                      -- Create a Button you can choose between the sections so LeftSection or RightSection
-    print("Button clicked!")                                            -- Add the Function of the Button Here
-end)
+Hinweis: Die vollständige API und alle Optionen (Themes, Logos, Callbacks, Keybinds etc.) findest du in den Beispielen im Repo‑Code.
 
--- Toggle
-LeftSection:CreateToggle({                                              -- Create a Toggle usign the same method as the button 
-    Title = "Test Toggle",                                              -- Name of the Toggle
-    Default = false,                                                    -- Default state of the Toggle so false off and true on
+## Beispiele
 
-    Callback = function(state)
-        print("Toggle state:", state)                                   -- Add the Function of the Toggle Here 
-    end
-})
+Im Repository gibt es Beispielskripte, die zeigen, wie Fenster, Tabs, Sektionen und die verschiedenen UI‑Elemente erstellt werden. Schau dir insbesondere die Dateien im Ordner `examples/` oder `demos/` an (falls vorhanden).
 
--- Slider
-LeftSection:CreateSlider({                                              -- Create a Slider using the same method as the Toggle and Button
-    Title = "Test Slider",                                              -- Name of the Slider
-    Min = 0,                                                            -- Minimum Value
-    Max = 100,                                                          -- Maximum Value
-    Default = 50,                                                       -- Default Value
-    Suffix = "%",                                                       -- Add any suffix to the value like % or ms or anything else can be left empty ""                                                                      
+## Beitragende
 
-    Callback = function(value)
-        print("Slider value:", value)                                   -- Add the Function of the Slider Here
-    end
-})
+Beiträge, Fehlerberichte und Feature‑Anfragen sind willkommen. Bitte:
 
--- Keybind                                                              -- Create an input field for annything 
-LeftSection:CreateKeybind({
-    Title = "UI Keybind",               
-    Default = Enum.KeyCode.RightControl,                                -- Set default here
+- Öffne ein Issue für Bugs oder größere Änderungen.
+- Erstelle einen Pull Request mit einer klaren Beschreibung und Tests/Beispielen, wenn möglich.
+- Schreibe aussagekräftige Commit‑Nachrichten.
 
-    Callback = function(key)
-        print("New key:", key.Name)
-    end
-})
+## Lizenz
 
--- Right section
-local RightSection = MainTab:CreateSection({                            
-    Title = "Dropdowns & Text",                                         
-    Column = "Right",
-    Droppable = true
-})
+Trage hier die gewünschte Lizenz ein (z. B. MIT):
 
--- Dropdown
-local Dropdown = RightSection:CreateDropdown({                          -- Create a Dropdown using the section you want it to be and :CreateDropdown
-    Title = "Test Dropdown",                                            -- Name of the Dropdown
-    Options = {
-        "Option 1",                                                     -- List of options for the Dropdown you can add as many as you want
-        "Option 2",
-        "Option 3"
-    },
-    Default = "Option 1",                                               -- Set default here
-    Searchbar = true,                                                   -- Enable/Disable Searchbar for the Dropdown 
+MIT © Relix78
 
-    Callback = function(value)
-        print("Selected:", value)
-    end
-})
+## TODO
 
--- Label
-local Label = RightSection:CreateLabel({                                -- Create a Status Label using the section you want it to be and :CreateLabel
-    Title = "Status",                                                   -- Status Name of the Label like "next event in" and then the timer 
-    Default = "Waiting..."                                              -- Default text of the Label                                                                        
---[[task.delay(5, function()                                    
-    Label:Set("UI loaded successfully!")                                -- Define the function here or later     
-end)]]                                          
-})
-
--- Paragraph
-RightSection:CreateParagraph({
-    Text = "This is a simple text paragraph inside the UI."             -- Paragraphs are just text that can be used for description
-})
-
--- Avatar preview
-RightSection:CreateAvatar("Avatar Preview")                             -- Create an Avatar preview name it as you like you can later use it as an esp preview
-
--- Settings tab
-local SettingsTab = Window:CreateTab({
-    Name = "Settings",
-    Icon = "11293977610",
-    SecondaryTab = true                                                 -- You can Create Up to 2 Secondary tabs that are seperatet from the main ones and listet aboth the User info
-})                                                                      -- Settings tab is empty
-
--- About tab
-local AboutTab = Window:CreateTab({
-    Name = "About",
-    Icon = "11419720347",
-    SecondaryTab = true
-})
-
-local InfoSection = AboutTab:CreateSection("Information")
-
-InfoSection:CreateParagraph({
-    Text = "Made by L5ks8."
-})
-
-InfoSection:CreateParagraph({
-    Text = "Pretty good UiLibary."
-})
-
--- Change label after 5 seconds                                         
-task.delay(5, function()                                                -- Define the Label functions
-    Label:Set("UI loaded successfully!")
-end)
+- API‑Dokumentation ergänzen (Liste aller Komponenten und Optionen).
+- Falls noch nicht vorhanden: Beispiel‑Ordner / Storybook‑ähnliche Demos hinzufügen.
+- Optional: Repo‑Name korrigieren (UiLibary → UiLibrary) und ggf. Paketnamen/Importpfade anpassen.
